@@ -861,28 +861,22 @@ app.delete("/api/requests/:id", (req, res) => {
   }
 });
 
-// --- Static File Serving & Page Routing ---
+// --- Page Serving Routes ---
 
-// Serve static assets directly from their folders. This part is already correct from our last fix.
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/templates', express.static(path.join(__dirname, 'templates')));
-app.use('/admin', express.static(path.join(__dirname, 'admin')));
+// The vercel.json routes handle all static assets (CSS, JS, etc.).
+// These routes in Express are now just for serving the main HTML pages
+// when a user navigates directly to them (or on page refresh).
 
-// Main homepage route
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Admin SPA Catch-All Route
-app.get("/admin*", (req, res) => {
-  res.sendFile(path.join(__dirname, "admin", "index.html"));
+app.get('/(movies|animes|webseries|contentDetails|watchlist|category|az-page)', (req, res) => {
+  res.sendFile(path.join(__dirname, `${req.path}.html`));
 });
 
-// NEW CATCH-ALL FOR .HTML PAGES
-// This ensures that refreshing any page like /movies.html or /animes.html works.
-app.get('/*.html', (req, res) => {
-    res.sendFile(path.join(__dirname, req.path));
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin', 'index.html'));
 });
 
 // --- Start the Server ---
