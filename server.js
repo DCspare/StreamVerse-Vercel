@@ -863,20 +863,8 @@ app.delete("/api/requests/:id", (req, res) => {
 
 // --- Page Serving Routes ---
 
-// The vercel.json routes handle all static assets (CSS, JS, etc.).
-// These routes in Express are now just for serving the main HTML pages
-// when a user navigates directly to them (or on page refresh).
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-app.get('/(movies|animes|webseries|contentDetails|watchlist|category|az-page)', (req, res) => {
-  res.sendFile(path.join(__dirname, `${req.path}.html`));
-});
-
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin', 'index.html'));
+app.get("/admin*", (req, res) => {
+  res.sendFile(path.join(__dirname, "admin", "index.html"));
 });
 
 // --- Start the Server ---
