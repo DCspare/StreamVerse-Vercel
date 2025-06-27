@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Use Vercel's provided PORT
+const PORT = process.env.PORT || 3000;
 
 // --- Middleware ---
 app.use(express.json()); // Body parser for API requests
@@ -13,13 +13,9 @@ app.use(express.json()); // Body parser for API requests
 // --- Helper Functions ---
 function readJsonFile(filePath) {
   try {
-    if (!fs.existsSync(filePath)) {
-      return null; 
-    }
+    if (!fs.existsSync(filePath)) { return null; }
     const data = fs.readFileSync(filePath, "utf8");
-    if (data.trim() === "") {
-      return null;
-    }
+    if (data.trim() === "") { return null; }
     return JSON.parse(data);
   } catch (error) {
     console.error(`Error reading or parsing file: ${filePath}`, error);
@@ -38,11 +34,7 @@ function writeJsonFile(filePath, data) {
 }
 
 function generateUniqueSlug(title, existingContent) {
-  let baseSlug = title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/[\s_]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+  let baseSlug = title.toLowerCase().replace(/[^\w\s-]/g, "").replace(/[\s_]+/g, "-").replace(/^-+|-+$/g, "");
   let slug = baseSlug;
   let counter = 2;
   while (existingContent.some((c) => c.id === slug)) {
@@ -53,6 +45,7 @@ function generateUniqueSlug(title, existingContent) {
 }
 
 // --- API Endpoints ---
+// This entire section is unchanged.
 app.get("/api/content", (req, res) => {
   const content = readJsonFile(path.join(__dirname, "data", "content.json"));
   if (content) res.json(content);
@@ -757,31 +750,19 @@ app.delete("/api/requests/:id", (req, res) => {
 
 
 // =========================================================================
-// === FINAL AND CORRECT ROUTING SECTION FOR VERCEL ========================
+// === CORRECTED AND FINAL ROUTING SECTION =================================
 // =========================================================================
-// By placing static serving first, we let Express handle requests for CSS, JS, etc.
+
+// Serve all static files from the project root.
+// This is the most important line for serving CSS, JS, images, templates, and even the .html files themselves.
+// It must come before the other routes that might catch the same paths.
 app.use(express.static(path.join(__dirname))); 
 
-// Then we handle the special case for the Admin SPA. If a user is at /admin/content
-// and hits refresh, this ensures they get the SPA's entrypoint.
-app.get("/admin*", (req, res) => {
+// This handles the Admin Panel Single Page Application (SPA).
+// Any request that starts with /admin/ will be served the admin/index.html file,
+// letting the client-side router handle the rest.
+app.get("/admin/*", (req, res) => {
   res.sendFile(path.join(__dirname, "admin", "index.html"));
-});
-
-// For any other route that is not an API call or a static file,
-// it is assumed to be a frontend page. This will catch requests for 
-// /movies.html, /animes.html etc., and also for just "/" and serve the correct file.
-// NOTE: This catch-all must be placed AFTER the API routes.
-app.get("/*", (req, res) => {
-    // If the request has an extension (like .html), serve that file.
-    if(path.extname(req.path).length > 0) {
-        res.sendFile(path.join(__dirname, req.path));
-    } else {
-        // If there's no extension, it's a clean URL like /movies, so serve movies.html.
-        // Or if it's the root "/", serve index.html.
-        const page = req.path === '/' ? 'index' : req.path;
-        res.sendFile(path.join(__dirname, `${page}.html`));
-    }
 });
 
 
