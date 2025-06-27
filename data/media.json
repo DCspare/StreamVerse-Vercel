@@ -1,0 +1,294 @@
+{
+  "interstellar": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/zSWdZVtXT7E",
+      "Hindi": "https://www.youtube.com/embed/4REFMXawFEA"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/xJHokMbljvjADYdit5fK5VQsXEG.jpg",
+      "https://image.tmdb.org/t/p/original/g5Io3bvY67m70T2iwYIgiHi2fL.jpg",
+      "https://image.tmdb.org/t/p/original/56h4m22n68So1s2V2a22x2i4gA.jpg"
+    ],
+    "downloadLinks": {
+      "720p": [
+        {
+          "label": "Full Movie (1.5GB)",
+          "url": "#"
+        }
+      ],
+      "1080p": [
+        {
+          "label": "Full Movie (2.7GB)",
+          "url": "#"
+        }
+      ],
+      "4k": [
+        {
+          "label": "Full Movie (8.5GB)",
+          "url": "#"
+        }
+      ],
+      "zip": [
+        {
+          "label": "All Qualities (ZIP)",
+          "url": "#"
+        }
+      ]
+    }
+  },
+  "inception": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/YoHD9XEInc0"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/s3TBrA1U1soXhtEGqkyOqrXtuzD.jpg"
+    ],
+    "downloadLinks": {
+      "1080p": [
+        {
+          "label": "Full Movie (2.2GB)",
+          "url": "#"
+        }
+      ]
+    }
+  },
+  "the-dark-knight": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/EXeTwQWrcwY"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/dqK9Hag1054tGHRQSqLSfrkvQnA.jpg"
+    ],
+    "downloadLinks": {
+      "1080p": [
+        {
+          "label": "Full Movie (2.5GB)",
+          "url": "#"
+        }
+      ]
+    }
+  },
+  "pulp-fiction": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/s7EdQ4FqbhY"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg"
+    ],
+    "downloadLinks": {}
+  },
+  "forrest-gump": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/bLvqoHBptjg"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/7c9UVPPiTPltouxRVY6N9uGYb9E.jpg"
+    ],
+    "downloadLinks": {}
+  },
+  "the-matrix": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/vKQi3bBA1y8"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/l4QHerTSbMI7qgvasqxP36prm1S.jpg"
+    ],
+    "downloadLinks": {}
+  },
+  "parasite": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/5xH0HfJHsaY"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/7bAafn_v2eN3s2Q2v1n6P5m7I44.jpg"
+    ],
+    "downloadLinks": {}
+  },
+  "dune": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/n9xhJrPXop4"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/jYEW5xZkZk2WTrdbMGAPFuBqbDc.jpg"
+    ],
+    "downloadLinks": {}
+  },
+  "spider-man-no-way-home": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/JfVOs4VSpmA"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg"
+    ],
+    "downloadLinks": {}
+  },
+  "joker": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/zAGVQLHvwOY"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/n6bUvigpRFqSwmPp1m2YADdbRBc.jpg"
+    ],
+    "downloadLinks": {}
+  },
+  "breaking-bad": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/HhesaQXLuRY"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg"
+    ]
+  },
+  "game-of-thrones": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/KPLWWIOCOOQ"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"
+    ]
+  },
+  "stranger-things": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/b9EkMc79ZSU"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/56v2KjBlU4XaOv9rVYEQypROD7P.jpg"
+    ]
+  },
+  "the-mandalorian": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/aOC8E8z_ifw"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/9ijMGlJKqcslswWUzPOuDsqdpew.jpg"
+    ]
+  },
+  "the-boys": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/tcrNsIaQkb4"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/2pe2g9S12aC9A7r2vG1h6s9fM6w.jpg"
+    ]
+  },
+  "the-witcher": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/ndl1W4ltcmg"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/foGkPx2a8Ec97ACEA3y2ksR2R2c.jpg"
+    ]
+  },
+  "peaky-blinders": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/oVzVdvGUn_g"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/b31vU5hu3DB9n1odnSAvt3hOUZ3.jpg"
+    ]
+  },
+  "dark": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/es6c-e1aG2A"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/32s6tKQ9hZy4pA0Aee34H2vYYaO.jpg"
+    ]
+  },
+  "money-heist": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/_InqQJrKGW4"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/x6IYN2USaV5Qp3n2GjJm5I4rI88.jpg"
+    ]
+  },
+  "the-queens-gambit": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/oZn3qSgmLqI"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/34OGjFEbHj0E3lE2w0iTUVq0CBz.jpg"
+    ]
+  },
+  "attack-on-titan": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/M_OauHnAFc8"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/hTP1DtLGFamjG9sz1wA7p9H_S7o.jpg"
+    ]
+  },
+  "death-note": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/NlJZ-YgAt-c"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/iU3NBsY2Y4lH74dc7I6z0aXOIbM.jpg"
+    ]
+  },
+  "demon-slayer": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/VQGCKyodJUQ"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/xUfRZu2mi8jH6SzQEJ9p2Q8H2sH.jpg"
+    ]
+  },
+  "jujutsu-kaisen": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/pkKu9hLT-t8"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/pBwNPiS1C1I74s4J5sVptp2HFXG.jpg"
+    ]
+  },
+  "one-punch-man": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/Poo5lqoD_OU"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/2wYeV2BvYy26L2U1r3e92M6aD2S.jpg"
+    ]
+  },
+  "my-hero-academia": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/EPvkcwyGHYs"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/c1eKzCkK4I6sUm4V3qB4x9vGg29.jpg"
+    ]
+  },
+  "naruto-shippuden": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/1dy2zPPrKDk"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/zAYRe2bJxpWTVrwwmB700iS9Wc0.jpg"
+    ]
+  },
+  "fullmetal-alchemist-brotherhood": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/--IcmZkvL0Q"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/2wYeV2BvYy26L2U1r3e92M6aD2S.jpg"
+    ]
+  },
+  "steins-gate": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/273uH_SjCMs"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/apF1P52sI2f0WphYwA95O1e7mIs.jpg"
+    ]
+  },
+  "cowboy-bebop": {
+    "trailers": {
+      "Official": "https://www.youtube.com/embed/qig4KOK2R2g"
+    },
+    "screenshots": [
+      "https://image.tmdb.org/t/p/original/6g2iYvGvQ0n1eTixyV9f5aI7T34.jpg"
+    ]
+  }
+}

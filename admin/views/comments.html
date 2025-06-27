@@ -1,0 +1,59 @@
+<!-- admin/views/comments.html -->
+<div class="page-header">
+  <h1>Comment Management</h1>
+  <p>Review and respond to all user comments.</p>
+</div>
+
+<div class="table-container">
+  <table class="data-table" id="comments-table">
+    <thead>
+      <tr>
+        <th>Content</th>
+        <th>User</th>
+        <th class="text-cell">Comment</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="comments-table-body">
+      <!-- Comment rows are loaded here by comment-manager.js -->
+    </tbody>
+  </table>
+</div>
+
+<!-- [FIX] Added the reply modal HTML -->
+<div id="comment-reply-modal-overlay" class="modal-overlay">
+  <div class="modal-content admin-modal">
+    <button id="comment-reply-modal-close-btn" class="modal-close-btn">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+    <h2>Reply to Comment</h2>
+    <div class="original-post">
+      <strong>Original Comment:</strong>
+      <p id="original-comment-text"></p>
+    </div>
+    <form id="comment-reply-form">
+      <input type="hidden" id="reply-comment-id" />
+      <input type="hidden" id="reply-content-id" />
+      <div class="form-group">
+        <label for="comment-reply-text">Your Reply</label>
+        <textarea
+          id="comment-reply-text"
+          class="form-input"
+          rows="4"
+          required
+        ></textarea>
+      </div>
+      <div class="form-actions">
+        <button
+          type="button"
+          id="comment-reply-modal-cancel-btn"
+          class="btn btn-secondary"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">Send Reply</button>
+      </div>
+    </form>
+  </div>
+</div>

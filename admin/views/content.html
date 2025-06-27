@@ -1,0 +1,329 @@
+<div class="page-header">
+  <h1>Content Management</h1>
+  <p>Add, edit, or delete movies, web series, and animes.</p>
+</div>
+
+<div class="content-toolbar">
+  <div class="main-actions">
+    <button id="add-content-btn" class="btn btn-primary">
+      <i class="ri-add-line"></i> Add New Content
+    </button>
+    <!-- NEW: Bulk Add Button -->
+    <button id="bulk-add-btn" class="btn btn-secondary">
+      <i class="ri-upload-cloud-2-line"></i> Bulk Add
+    </button>
+    <div class="history-actions">
+      <button id="undo-btn" class="btn btn-secondary" disabled>
+        <i class="ri-arrow-go-back-line"></i> Undo
+      </button>
+      <button id="redo-btn" class="btn btn-secondary" disabled>
+        <i class="ri-arrow-go-forward-line"></i> Redo
+      </button>
+    </div>
+  </div>
+  <!-- NEW: Bulk Actions Toolbar (initially hidden) -->
+  <div
+    id="bulk-actions-toolbar"
+    class="bulk-actions-container"
+    style="display: none"
+  >
+    <span id="selection-count">0 items selected</span>
+    <button id="delete-selected-btn" class="btn btn-danger">
+      <i class="ri-delete-bin-line"></i> Delete Selected
+    </button>
+  </div>
+  <input
+    type="search"
+    id="search-input"
+    class="admin-search-input"
+    placeholder="Search content..."
+  />
+</div>
+
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <!-- NEW: Select all checkbox -->
+        <th class="checkbox-cell">
+          <input
+            type="checkbox"
+            id="select-all-checkbox"
+            title="Select all items"
+          />
+        </th>
+        <th>Poster</th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Year</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="content-table-body">
+      <!-- Rows will be dynamically inserted here -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Add/Edit Content Modal (Existing - Unchanged) -->
+<div id="content-modal" class="modal-overlay">
+  <div class="modal-content admin-modal">
+    <button class="modal-close-btn close-modal">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+    <h2 id="modal-title">Add New Content</h2>
+    <form id="content-form" novalidate>
+      <div class="form-group">
+        <label for="content-id-display">ID (Slug)</label>
+        <input
+          type="text"
+          id="content-id-display"
+          name="id"
+          class="form-input"
+          readonly
+          placeholder="Generated from title on creation"
+        />
+      </div>
+
+      <div class="form-group-grid">
+        <div class="form-group">
+          <label for="content-title">Title</label>
+          <input
+            type="text"
+            id="content-title"
+            name="title"
+            class="form-input"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="content-type">Type</label>
+          <select id="content-type" name="type" class="form-input" required>
+            <option value="movie">Movie</option>
+            <option value="webseries">Web Series</option>
+            <option value="animes">Anime</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="content-description">Short Description</label>
+        <textarea
+          id="content-description"
+          name="description"
+          class="form-input"
+          rows="2"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="content-fullDescription"
+          >Full Description / Storyline</label
+        >
+        <textarea
+          id="content-fullDescription"
+          name="fullDescription"
+          class="form-input"
+          rows="4"
+        ></textarea>
+      </div>
+
+      <div class="form-group-grid">
+        <div class="form-group">
+          <label for="content-year">Year</label>
+          <input
+            type="text"
+            id="content-year"
+            name="year"
+            class="form-input"
+            placeholder="e.g., 2023 or 2020-2023"
+            required
+          />
+        </div>
+        <div class="form-group" data-type-specific="movie webseries animes">
+          <label for="content-rating">Rating (e.g., 8.5)</label>
+          <input
+            type="number"
+            step="0.1"
+            id="content-rating"
+            name="rating"
+            class="form-input"
+          />
+        </div>
+      </div>
+
+      <div class="form-group-grid">
+        <div class="form-group" data-type-specific="movie">
+          <label for="content-duration">Duration</label>
+          <input
+            type="text"
+            id="content-duration"
+            name="duration"
+            class="form-input"
+            placeholder="e.g., 2h 15m"
+          />
+        </div>
+        <div class="form-group" data-type-specific="webseries animes">
+          <label for="content-duration-series">Seasons</label>
+          <input
+            type="text"
+            id="content-duration-series"
+            name="duration"
+            class="form-input"
+            placeholder="e.g., 3 Seasons"
+          />
+        </div>
+        <div class="form-group" data-type-specific="webseries animes">
+          <label for="content-studio">Studio</label>
+          <input
+            type="text"
+            id="content-studio"
+            name="studio"
+            class="form-input"
+          />
+        </div>
+        <div class="form-group" data-type-specific="movie">
+          <label for="content-director">Director(s) (comma-separated)</label>
+          <input
+            type="text"
+            id="content-director"
+            name="director"
+            class="form-input"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="content-genres">Genres (comma-separated)</label>
+        <input
+          type="text"
+          id="content-genres"
+          name="genres"
+          class="form-input"
+          placeholder="Action, Sci-Fi, Thriller"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="content-cast">Cast (comma-separated)</label>
+        <input
+          type="text"
+          id="content-cast"
+          name="cast"
+          class="form-input"
+          placeholder="Actor One, Actor Two"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="content-tags">Tags (comma-separated)</label>
+        <input
+          type="text"
+          id="content-tags"
+          name="tags"
+          class="form-input"
+          placeholder="featured-movie, trending"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="content-languages">Languages (comma-separated)</label>
+        <input
+          type="text"
+          id="content-languages"
+          name="languages"
+          class="form-input"
+          placeholder="English, Japanese"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="content-quality">Quality (comma-separated)</label>
+        <input
+          type="text"
+          id="content-quality"
+          name="quality"
+          class="form-input"
+          placeholder="HD, 4K, 1080p"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="content-posterImage">Poster Image URL</label>
+        <input
+          type="url"
+          id="content-posterImage"
+          name="posterImage"
+          class="form-input"
+          placeholder="https://example.com/poster.jpg"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="content-heroImage">Hero/Background Image URL</label>
+        <input
+          type="url"
+          id="content-heroImage"
+          name="heroImage"
+          class="form-input"
+          placeholder="https://example.com/hero.jpg"
+        />
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary close-modal">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">Save Content</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- NEW: Bulk Add Content Modal -->
+<div id="bulk-add-modal" class="modal-overlay">
+  <div class="modal-content admin-modal">
+    <button class="modal-close-btn close-modal">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+    <h2>Bulk Add Content</h2>
+    <p>
+      Paste an array of content objects in JSON format below. Each object must
+      have at least a <code>title</code>, <code>type</code>, and
+      <code>year</code>.
+    </p>
+    <form id="bulk-add-form">
+      <div class="form-group">
+        <label for="bulk-json-input">JSON Data</label>
+        <textarea
+          id="bulk-json-input"
+          class="form-input"
+          rows="15"
+          placeholder='[
+  {
+    "title": "New Movie 1",
+    "type": "movie",
+    "year": "2024",
+    "posterImage": "http://example.com/poster1.jpg",
+    "genres": ["Action", "Sci-Fi"]
+  },
+  {
+    "title": "New Series 2",
+    "type": "webseries",
+    "year": "2023",
+    "posterImage": "http://example.com/poster2.jpg",
+    "genres": ["Drama"]
+  }
+]'
+        ></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary close-modal">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">Add Content</button>
+      </div>
+    </form>
+  </div>
+</div>

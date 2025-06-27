@@ -1,0 +1,89 @@
+<header class="site-header glass">
+  <div class="container header-container">
+    <div class="header-left">
+      <a href="index.html" class="logo">StreamVerse</a>
+      <nav class="main-nav" id="mainNav">
+        <button class="icon-btn close-mobile-menu-btn" id="closeMobileMenuBtn">
+          <i class="ri-close-line ri-lg"></i>
+        </button>
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="movies.html" class="nav-link" target="_blank" >Movies</a>
+        <a href="animes.html" class="nav-link" target="_blank" >Anime</a>
+        <a href="webseries.html" class="nav-link" target="_blank" >Web Series</a>
+        <div class="nav-item-dropdown-wrapper" id="genreDropdownWrapper">
+          <a href="#" class="nav-link" id="genreDropdownToggle">Genre <i class="ri-arrow-down-s-line nav-dropdown-icon"></i></a>
+          <div id="genreDropdown" class="genre-dropdown glass hidden">
+            <!-- Genre links will be populated by JS -->
+          </div>
+        </div>
+        <!-- Watchlist Link and Dropdown Container -->
+        <div class="nav-item-dropdown-wrapper watchlist-dropdown-container" id="watchlistDropdownWrapper">
+            <a href="watchlist.html" class="nav-link" target="_blank" id="watchlistDropdownToggle">
+                My List
+                <span class="watchlist-count-badge hidden">0</span> <!-- Badge for count -->
+                <i class="ri-arrow-down-s-line nav-dropdown-icon"></i>
+            </a>
+            <div id="watchlistDropdown" class="watchlist-dropdown glass hidden">
+                <!-- Watchlist items will be populated by JS (watchlist.js) -->
+            </div>
+        </div>
+        <div class="nav-item-dropdown-wrapper" id="azDropdownWrapper">
+          <a href="az-page.html" class="nav-link" id="azDropdownToggle" target="_blank">A-Z <i class="ri-arrow-down-s-line nav-dropdown-icon"></i></a>
+          <div id="azDropdown" class="az-dropdown glass hidden">
+            <!-- Alphabet links will be populated by JS -->
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="header-right">
+      <div class="search-container">
+        <button id="searchToggle" class="icon-btn search-toggle-btn">
+          <i class="ri-search-line ri-lg"></i>
+        </button>
+        <div id="searchBar" class="search-bar-dropdown glass hidden">
+          <button class="icon-btn close-search-btn" id="closeSearchBtn">
+            <i class="ri-close-line ri-lg"></i>
+          </button>
+          <div class="search-input-wrapper">
+            <input
+              type="text"
+              placeholder="Search titles, genres..."
+              class="search-input"
+              id="searchInputField"
+            />
+            <button
+              class="icon-btn search-clear-btn hidden"
+              id="searchClearBtn"
+            >
+              <i class="ri-close-line"></i>
+            </button>
+            <button class="search-submit-btn" id="searchSubmit">
+              <i class="ri-search-line"></i>
+            </button>
+          </div>
+          <div id="searchResultsContainer" class="search-results-container">
+            <!-- Search results will be populated by JS -->
+          </div>
+        </div>
+      </div>
+      <!-- Auth Button (Visible when not logged in) -->
+      <button id="authToggle" class="btn btn-primary auth-btn">
+        <i class="ri-user-line"></i>
+        <span class="auth-btn-text">Sign In</span>
+      </button>
+      <!-- User Profile Button and Dropdown (Added by auth.js when logged in) -->
+      <!-- Example structure (initially not in HTML, added by JS):
+      <button id="userProfileToggle" class="icon-btn user-profile-btn hidden">
+          <i class="ri-user-fill ri-lg"></i>
+      </button>
+      <div id="userProfileDropdown" class="user-profile-dropdown glass hidden">
+          <p class="user-email">user@example.com</p>
+          <button id="signOutBtn" class="btn btn-secondary btn-full-width">Sign Out</button>
+      </div>
+      -->
+      <button class="icon-btn mobile-menu-btn" id="mobileMenuToggle">
+        <i class="ri-menu-line ri-lg"></i>
+      </button>
+    </div>
+  </div>
+</header>

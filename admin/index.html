@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamVerse Admin</title>
+
+    <!-- Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/admin/css/admin.css" />
+    <!-- ADDED: Responsive stylesheet -->
+    <link rel="stylesheet" href="/admin/css/admin-responsive.css" />
+  </head>
+  <body>
+    <!-- Notification container -->
+    <div id="notificationContainer"></div>
+
+    <div class="sidebar-overlay"></div>
+
+    <div class="admin-container">
+      <header class="admin-header">
+        <div class="admin-header-left" style="display: flex; align-items: center;">
+          <!-- ADDED: Sidebar Toggle Button -->
+          <button class="sidebar-toggle" aria-label="Toggle sidebar">
+            <i class="ri-menu-line"></i>
+          </button>
+          <a href="/admin" class="admin-logo">StreamVerse <span>Admin</span></a>
+        </div>
+        <div class="admin-header-right">
+          <a href="/index.html" target="_blank" class="btn btn-secondary">
+            <i class="ri-external-link-line"></i> View Public Site
+          </a>
+        </div>
+      </header>
+
+      <aside class="admin-sidebar">
+        <nav class="admin-nav">
+          <ul>
+            <li>
+              <a href="/admin" data-page="dashboard" class="nav-link active">
+                <i class="ri-dashboard-line"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/admin/content" data-page="content" class="nav-link">
+                <i class="ri-film-line"></i>
+                <span>Content</span>
+              </a>
+            </li>
+            <li>
+              <a href="/admin/comments" data-page="comments" class="nav-link">
+                <i class="ri-chat-3-line"></i>
+                <span>Comments</span>
+              </a>
+            </li>
+            <li>
+              <a href="/admin/requests" data-page="requests" class="nav-link">
+                <i class="ri-mail-send-line"></i>
+                <span>Requests</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main id="admin-main-content" class="admin-main-content">
+        <!-- Dynamic content will be loaded here -->
+      </main>
+    </div>
+
+    <!-- Core Admin Script (Set as Module) -->
+    <!-- All other scripts will be imported dynamically by this main script -->
+    <script type="module" src="/admin/js/admin.js"></script>
+  </body>
+</html>

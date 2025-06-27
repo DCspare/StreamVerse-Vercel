@@ -1,0 +1,355 @@
+{
+  "breaking-bad": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "720p": [
+            {
+              "episodeNumber": 1,
+              "title": "Pilot",
+              "downloadUrl": "#"
+            },
+            {
+              "episodeNumber": 2,
+              "title": "Cat's in the Bag...",
+              "downloadUrl": "#"
+            },
+            {
+              "episodeNumber": 3,
+              "title": "...And the Bag's in the River",
+              "downloadUrl": "#"
+            }
+          ],
+          "1080p": [
+            {
+              "episodeNumber": 1,
+              "title": "Pilot",
+              "downloadUrl": "#"
+            },
+            {
+              "episodeNumber": 2,
+              "title": "Cat's in the Bag...",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      },
+      "2": {
+        "qualities": {
+          "720p": [
+            {
+              "episodeNumber": 1,
+              "title": "Seven Thirty-Seven",
+              "downloadUrl": "#"
+            },
+            {
+              "episodeNumber": 2,
+              "title": "Grilled",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": [
+      {
+        "label": "Season 1 - 720p (ZIP)",
+        "url": "#"
+      },
+      {
+        "label": "Season 1 - 1080p (ZIP)",
+        "url": "#"
+      },
+      {
+        "label": "Season 2 - 720p (ZIP)",
+        "url": "#"
+      }
+    ]
+  },
+  "game-of-thrones": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "1080p": [
+            {
+              "episodeNumber": 1,
+              "title": "Winter Is Coming",
+              "downloadUrl": "#"
+            },
+            {
+              "episodeNumber": 2,
+              "title": "The Kingsroad",
+              "downloadUrl": "#"
+            },
+            {
+              "episodeNumber": 3,
+              "title": "Lord Snow",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": [
+      {
+        "label": "Season 1 - 1080p (ZIP)",
+        "url": "#"
+      }
+    ]
+  },
+  "stranger-things": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "720p": [
+            {
+              "episodeNumber": 1,
+              "title": "Chapter One: The Vanishing of Will Byers",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": []
+  },
+  "the-mandalorian": {
+    "seasons": {},
+    "zipFiles": []
+  },
+  "the-boys": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "1080p": [
+            {
+              "episodeNumber": 1,
+              "title": "The Name of the Game",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": []
+  },
+  "the-witcher": {
+    "seasons": {},
+    "zipFiles": []
+  },
+  "peaky-blinders": {
+    "seasons": {},
+    "zipFiles": []
+  },
+  "dark": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "720p": [
+            {
+              "episodeNumber": 1,
+              "title": "Secrets",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": []
+  },
+  "money-heist": {
+    "seasons": {
+      "1": {
+        "qualities": {}
+      },
+      "2": {
+        "qualities": {}
+      },
+      "3": {
+        "qualities": {}
+      },
+      "4": {
+        "qualities": {}
+      }
+    },
+    "zipFiles": []
+  },
+  "the-queens-gambit": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "1080p": [
+            {
+              "episodeNumber": 1,
+              "title": "Openings",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": []
+  },
+  "attack-on-titan": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "720p": [
+            {
+              "episodeNumber": 1,
+              "title": "To You, in 2000 Years: The Fall of Shiganshina, Part 1",
+              "downloadUrl": "#"
+            },
+            {
+              "episodeNumber": 2,
+              "title": "That Day: The Fall of Shiganshina, Part 2",
+              "downloadUrl": "#"
+            }
+          ],
+          "1080p": [
+            {
+              "episodeNumber": 1,
+              "title": "To You, in 2000 Years: The Fall of Shiganshina, Part 1",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      },
+      "2": {
+        "qualities": {
+          "720p": [
+            {
+              "episodeNumber": 1,
+              "title": "Beast Titan",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      },
+      "3": {
+        "qualities": {}
+      }
+    },
+    "zipFiles": [
+      {
+        "label": "Season 1 - 720p (ZIP)",
+        "url": "#"
+      },
+      {
+        "label": "Season 1 - 1080p (ZIP)",
+        "url": "#"
+      }
+    ]
+  },
+  "death-note": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "720p": [
+            {
+              "episodeNumber": 1,
+              "title": "Rebirth",
+              "downloadUrl": "#"
+            },
+            {
+              "episodeNumber": 2,
+              "title": "Confrontation",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": [
+      {
+        "label": "Season 1 (All) - 720p (ZIP)",
+        "url": "#"
+      }
+    ]
+  },
+  "demon-slayer": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "1080p": [
+            {
+              "episodeNumber": 1,
+              "title": "Cruelty",
+              "downloadUrl": "#"
+            },
+            {
+              "episodeNumber": 2,
+              "title": "Trainer Sakonji Urokodaki",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": []
+  },
+  "jujutsu-kaisen": {
+    "seasons": {},
+    "zipFiles": []
+  },
+  "one-punch-man": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "1080p": [
+            {
+              "episodeNumber": 1,
+              "title": "The Strongest Man",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": []
+  },
+  "my-hero-academia": {
+    "seasons": {},
+    "zipFiles": []
+  },
+  "naruto-shippuden": {
+    "seasons": {},
+    "zipFiles": []
+  },
+  "fullmetal-alchemist-brotherhood": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "720p": [
+            {
+              "episodeNumber": 1,
+              "title": "Fullmetal Alchemist",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": []
+  },
+  "steins-gate": {
+    "seasons": {},
+    "zipFiles": []
+  },
+  "cowboy-bebop": {
+    "seasons": {
+      "1": {
+        "qualities": {
+          "720p": [
+            {
+              "episodeNumber": 1,
+              "title": "Asteroid Blues",
+              "downloadUrl": "#"
+            }
+          ]
+        }
+      }
+    },
+    "zipFiles": []
+  }
+}

@@ -1,0 +1,154 @@
+<div class="page-header">
+  <a href="/admin/content" class="back-link"
+    ><i class="ri-arrow-left-line"></i> Back to Content List</a
+  >
+  <h1 id="media-page-title">Manage Media for...</h1>
+  <p id="media-page-id">ID: ...</p>
+</div>
+
+<div class="media-management-grid">
+  <!-- Trailers Section (Common) -->
+  <div class="media-card">
+    <h2>Trailers</h2>
+    <form id="add-trailer-form" class="media-form">
+      <div class="form-group-grid-small">
+        <input
+          type="text"
+          id="trailer-name"
+          placeholder="e.g., Official Trailer"
+          required
+        />
+        <input
+          type="url"
+          id="trailer-url"
+          placeholder="YouTube or video URL"
+          required
+        />
+        <button type="submit" class="btn btn-primary btn-small">Add</button>
+      </div>
+    </form>
+    <ul id="trailers-list" class="media-list">
+      <!-- Trailers will be loaded here -->
+    </ul>
+  </div>
+
+  <!-- Screenshots Section (Common) -->
+  <div class="media-card">
+    <h2>Screenshots</h2>
+    <form id="add-screenshot-form" class="media-form">
+      <div class="form-group-grid-small">
+        <input
+          type="url"
+          id="screenshot-url"
+          placeholder="Image URL"
+          required
+          class="full-width"
+        />
+        <button type="submit" class="btn btn-primary btn-small">Add</button>
+      </div>
+    </form>
+    <ul id="screenshots-list" class="media-list">
+      <!-- Screenshots will be loaded here -->
+    </ul>
+  </div>
+
+  <!-- Movie-Specific Section -->
+  <div id="movie-downloads-section" style="display: none">
+    <div class="media-card">
+      <h2>Download Links (for Movies)</h2>
+      <form id="add-download-link-form" class="media-form">
+        <div class="form-group-grid-small">
+          <input
+            type="text"
+            id="download-quality"
+            placeholder="e.g., 1080p"
+            required
+          />
+          <input
+            type="url"
+            id="download-url"
+            placeholder="Download URL"
+            required
+          />
+          <button type="submit" class="btn btn-primary btn-small">Add</button>
+        </div>
+      </form>
+      <ul id="download-links-list" class="media-list">
+        <!-- Download links will be loaded here -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- Series/Anime-Specific Section -->
+  <div id="series-episodes-section" style="display: none">
+    <div class="media-card">
+      <h2>Seasons & Episodes</h2>
+
+      <!-- Add a new season -->
+      <form id="add-season-form" class="media-form">
+        <div class="form-group-grid-small">
+          <input
+            type="number"
+            id="season-number-input"
+            placeholder="Season Number (e.g., 1)"
+            required
+            min="1"
+          />
+          <button
+            type="submit"
+            class="btn btn-primary btn-small"
+            style="grid-column: 3"
+          >
+            Add Season
+          </button>
+        </div>
+      </form>
+
+      <!-- Accordion for seasons will be generated here -->
+      <div id="seasons-accordion" class="seasons-accordion">
+        <!-- Placeholder -->
+        <div class="placeholder-box">No seasons yet. Add one above.</div>
+      </div>
+    </div>
+
+    <!-- Add episode form will be moved inside season items dynamically -->
+    <template id="add-episode-form-template">
+      <form class="add-episode-form media-form">
+        <h4 class="add-episode-title">Add New Episode</h4>
+        <div class="form-group-grid">
+          <input
+            type="number"
+            name="episodeNumber"
+            placeholder="Ep. Number"
+            required
+            min="1"
+          />
+          <input
+            type="text"
+            name="title"
+            placeholder="Episode Title"
+            required
+          />
+          <input
+            type="text"
+            name="quality"
+            placeholder="Quality (e.g., 720p)"
+            required
+          />
+          <input
+            type="url"
+            name="downloadUrl"
+            placeholder="Download URL"
+            required
+          />
+        </div>
+        <div class="form-actions" style="padding-top: 1rem; margin-top: 1rem">
+          <button type="button" class="btn btn-secondary cancel-add-episode">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Save Episode</button>
+        </div>
+      </form>
+    </template>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="page-header">
+  <h1>Request Management</h1>
+  <p>Review, reply to, and delete user content requests.</p>
+</div>
+
+<div class="table-container">
+  <table class="data-table" id="requests-table">
+    <thead>
+      <!-- <tr>
+        <th>User</th>
+        <th>Email</th>
+        <th>Request Text</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr> -->
+      <tr>
+        <th>Request ID</th>
+        <th>Content ID</th>
+        <th>User</th>
+        <th class="text-cell">Request Text</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="requests-table-body">
+      <!-- Request rows are loaded here by request-manager.js -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Reply Modal -->
+<div id="request-reply-modal-overlay" class="modal-overlay">
+  <div id="request-reply-modal" class="admin-modal">
+    <button id="request-reply-modal-close-btn" class="modal-close-btn">
+      ×
+    </button>
+    <h2>Reply to Request</h2>
+
+    <div class="form-group">
+      <label>Original Request:</label>
+      <p
+        id="original-request-text"
+        class="placeholder-box"
+        style="text-align: left"
+      ></p>
+    </div>
+
+    <form id="request-reply-form">
+      <input type="hidden" id="reply-request-id" />
+      <div class="form-group">
+        <label for="request-reply-text">Your Reply:</label>
+        <textarea
+          id="request-reply-text"
+          class="form-input"
+          rows="4"
+          required
+        ></textarea>
+      </div>
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="request-reply-modal-cancel-btn"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">Post Reply</button>
+      </div>
+    </form>
+  </div>
+</div>

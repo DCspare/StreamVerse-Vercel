@@ -1,0 +1,859 @@
+/* Common Mobile Styles (Up to 767px) */
+@media (max-width: 767px) {
+  :root {
+    --header-height: 56px;
+  }
+  body {
+    font-size: 15px;
+    padding-top: var(--header-height);
+  }
+  .container {
+    width: 100%;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  /* Header */
+  .site-header {
+    height: var(--header-height);
+  }
+  .logo {
+    font-size: 1.3rem;
+    margin-right: 0.5rem;
+  }
+  .header-right {
+    gap: 0.25rem;
+  }
+  .auth-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  .auth-btn i {
+    margin-right: 0.25rem;
+  }
+
+  .main-nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    /* Change for smooth slide-in */
+    transform: translateX(100%);
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-left: 1px solid var(--border-color-light);
+    z-index: 999;
+    overflow-y: auto;
+    /* Adjusted padding to make space for close button and reduce top space */
+    padding-top: var(
+      --header-height
+    ); /* Keep menu content below fixed header */
+    padding-bottom: 2rem; /* Add some bottom padding for scroll */
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+    /* Change transition property */
+    transition: transform 0.3s ease-in-out;
+  }
+  .main-nav.active {
+    /* Change for smooth slide-in */
+    transform: translateX(0);
+  }
+  /* Mobile nav links styling for new layout */
+  .main-nav .nav-link {
+    padding: 1.2rem 1.5rem; /* Increased padding for larger tap targets */
+    text-align: left;
+    width: 100%; /* Ensure full width */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Subtle separator */
+    color: var(--text-color);
+    font-size: 1.05rem; /* Slightly larger font */
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .main-nav .nav-link:last-child {
+    border-bottom: none;
+  }
+  .main-nav .nav-link.active,
+  .main-nav .nav-link:hover {
+    background-color: rgba(
+      139,
+      92,
+      246,
+      0.2
+    ); /* Light purple background on active/hover */
+    color: var(--primary-color); /* Primary color for text */
+  }
+  /* Mobile menu close button position */
+  .close-mobile-menu-btn {
+    position: absolute;
+    top: 0.75rem; /* Closer to top edge */
+    right: 0.75rem; /* Closer to right edge */
+    display: block; /* Ensure it's visible */
+    z-index: 1000; /* Ensure it's above menu items */
+  }
+
+  /* Specific styling for dropdown wrappers inside main-nav on mobile */
+  .main-nav .nav-item-dropdown-wrapper {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Consistent separator */
+  }
+  .main-nav .nav-item-dropdown-wrapper:last-of-type {
+    /* Adjust for the last wrapper if needed */
+    border-bottom: none;
+  }
+  .main-nav .nav-item-dropdown-wrapper > .nav-link {
+    padding: 1.2rem 1.5rem; /* Match other nav-link padding */
+    width: 100%;
+    display: flex; /* Allow content to be centered or justified */
+    justify-content: space-between; /* Push toggle icon to the right if applicable */
+    align-items: center;
+    border-bottom: none; /* Remove duplicate border */
+  }
+  /* Style for the dropdown menu itself when open on mobile */
+  .main-nav .genre-dropdown,
+  .main-nav .watchlist-dropdown,
+  .main-nav .az-dropdown {
+    position: static; /* Position statically within the flow of the mobile menu */
+    width: 100%;
+    border: none; /* No extra border */
+    box-shadow: none; /* No extra shadow */
+    background: transparent; /* No extra background */
+    padding: 0 0 1rem 2rem; /* Indent and add padding */
+    opacity: 1; /* Always visible when active */
+    visibility: visible; /* Always visible when active */
+    transition: none; /* No transition for internal dropdown on mobile */
+  }
+  .main-nav .dropdown-item {
+    padding: 0.6rem 1rem; /* Adjust padding for sub-items */
+    font-size: 0.95rem;
+    text-align: left;
+    border-radius: 4px;
+    margin-bottom: 0.25rem;
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.05
+    ); /* Light background for sub-items */
+  }
+  .main-nav .az-dropdown {
+    grid-template-columns: repeat(
+      4,
+      1fr
+    ); /* Adjust grid for A-Z in mobile menu */
+    padding-right: 2rem; /* Add some padding on the right */
+  }
+  .main-nav .watchlist-dropdown-item {
+    padding: 0.75rem 1rem;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  /* Mobile Search Bar: Icon change and full-screen behavior */
+  .search-toggle-btn.search-active i::before {
+    content: "\EA48"; /* Remixicon close (ri-close-line) unicode */
+    font-family: "remixicon";
+    font-weight: bold;
+  }
+  .search-bar-dropdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+    border-radius: 0;
+    padding: 1rem;
+    padding-top: var(--header-height);
+    background-color: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+    z-index: 1010;
+  }
+  .search-bar-dropdown.hidden {
+    display: none !important;
+  }
+  .close-search-btn {
+    display: block;
+  }
+  .search-input-wrapper {
+    margin-bottom: 1rem;
+  }
+  .search-input {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    padding-right: 5.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  .search-input-wrapper .search-submit-btn {
+    right: 0.5rem;
+  }
+  .search-input-wrapper .search-clear-btn {
+    right: 3rem;
+  }
+  .search-results-container {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  /* Hero Section - Mobile Slider Fixes */
+  .hero-section {
+    height: auto;
+    min-height: 320px;
+    padding-top: 1rem;
+    padding-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+  }
+  .slider-title {
+    font-size: 1.3em;
+    bottom: 10px;
+    padding: 5px 10px;
+    line-height: 1.2;
+    margin-bottom: 0;
+  }
+
+  .hero-slider-dots {
+    bottom: 0.75rem;
+    gap: 0.4rem;
+  }
+
+  .hero-slider-dots button {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Content Card Sizing for mobile */
+  /* FIX: Revert card to fixed width for horizontal scrolling rows (like on homepage) */
+  .content-card {
+    width: 130px;
+  }
+  .section-title {
+    font-size: 1.15rem;
+  }
+  .content-row {
+    gap: 0.75rem;
+  }
+
+  /* FIX: Styles for the dedicated category pages (movies, animes, etc.) */
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  /* This makes cards inside the grid take up the full column width */
+  .content-grid .content-card {
+    width: 100%;
+  }
+
+  /* Card UI Redesign for Mobile */
+  .card-action-btn.watchlist-toggle {
+    width: 2rem;
+    height: 2rem;
+    top: 0.25rem;
+    left: 0.25rem;
+  }
+  .card-action-btn.play-centered {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
+  .card-title-overlay {
+    font-size: 0.85rem;
+    padding: 0 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .genre-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  .genre-card-name {
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    margin: 0.5rem;
+    max-width: calc(100% - 1rem);
+  }
+  .modal-inner-content {
+    padding: 1rem;
+    max-height: calc(100vh - var(--header-height) - 2rem);
+  }
+  .auth-icon i {
+    font-size: 1.5rem;
+  }
+  .auth-tab {
+    padding: 0.6rem 0;
+    font-size: 0.9rem;
+  }
+  .form-input,
+  .form-label,
+  .form-link,
+  .custom-checkbox,
+  .form-divider-text {
+    font-size: 0.8rem;
+    gap: 2px;
+  }
+  .social-login-buttons {
+    gap: 0.5rem;
+  }
+  .social-btn i {
+    font-size: 1rem;
+  }
+
+  .video-modal-content {
+    max-width: 100vw;
+    border-radius: 0;
+  }
+  .video-player-wrapper {
+    border-radius: 0;
+  }
+  .video-controls-bar {
+    padding: 0.5rem;
+  }
+  .video-controls-top {
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .video-controls-left,
+  .video-controls-right {
+    gap: 0.2rem;
+    flex-basis: auto;
+    justify-content: center;
+    margin-bottom: 0.3rem;
+  }
+  .control-btn {
+    width: 2rem;
+    height: 2rem;
+  }
+  .control-btn i {
+    font-size: 1rem;
+  }
+  .volume-slider {
+    width: 50px;
+  }
+  .video-time {
+    font-size: 0.7rem;
+    margin: 0 0.3rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;
+  }
+  .footer-column {
+    margin-bottom: 1.5rem;
+  }
+  .social-links {
+    justify-content: center;
+  }
+  .app-download-buttons {
+    align-items: center;
+  }
+  .footer-bottom {
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .icon-btn {
+    display: block;
+  }
+
+  /* Content Details Page - Mobile adjustments */
+  .movie-detail-banner {
+    height: auto;
+    min-height: 400px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .movie-detail-content-wrapper {
+    flex-direction: column; /* Stack poster and info vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 1.5rem; /* Reduce gap */
+    text-align: center; /* Center text content */
+  }
+
+  .movie-detail-poster {
+    width: 180px; /* Smaller poster on mobile */
+    margin: 0 auto; /* Center poster */
+  }
+
+  .movie-detail-info {
+    text-align: center; /* Center text on mobile */
+    padding: 0 1rem; /* Add horizontal padding */
+  }
+
+  .movie-detail-title {
+    font-size: 1.8rem; /* Smaller title */
+    flex-direction: column; /* Stack title text and watchlist icon */
+    gap: 0.5rem; /* Space between stacked title and icon */
+  }
+
+  .watchlist-icon-btn {
+    width: 2.2rem; /* Smaller icon button */
+    height: 2.2rem;
+    font-size: 1.1rem; /* Smaller icon */
+  }
+
+  .movie-detail-meta {
+    justify-content: center; /* Center meta items */
+    gap: 0.5rem 1rem; /* Adjust meta item spacing */
+  }
+
+  .movie-detail-description,
+  .movie-detail-attributes p {
+    font-size: 0.875rem; /* Smaller text */
+    text-align: center; /* Center description text */
+  }
+
+  /* Content Information Section */
+  .movie-info-section .info-grid {
+    align-items: center; /* Center items on mobile */
+  }
+
+  .movie-info-section .info-item {
+    text-align: center; /* Center text within info items */
+    width: 100%; /* Take full width on mobile */
+  }
+
+  /* Download Section */
+  .download-section .section-title {
+    font-size: 1.25rem;
+  }
+  .download-subsection h3 {
+    font-size: 1rem;
+  }
+  .download-links .btn {
+    width: 100%; /* Make download buttons full width on mobile */
+  }
+
+  /* Comment Section */
+  .comment-section {
+    max-width: 100%; /* Full width on mobile */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5rem; /* Add some side padding */
+  }
+  .comment-form-container {
+    padding: 1rem; /* Smaller padding */
+  }
+  .comment-tab {
+    padding: 0.6rem 1rem; /* Smaller tab padding */
+    font-size: 0.9rem;
+  }
+  .submitted-comment {
+    padding: 0.75rem; /* Smaller comment padding */
+  }
+
+  /* Responsive Screenshot Grid */
+  .screenshots-grid {
+    column-count: 2;
+  }
+
+  /* Responsive Lightbox */
+  .lightbox-overlay {
+    padding: 1rem; /* Reduced padding on smaller screens */
+  }
+
+  .lightbox-close-btn {
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablet Styles (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --header-height: 60px;
+  }
+  body {
+    font-size: 16px;
+    padding-top: var(--header-height);
+  }
+  .container {
+    width: 90%;
+  }
+  /* Hide mobile menu close button */
+  .close-mobile-menu-btn {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: none;
+  }
+  .main-nav {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    width: auto;
+    background-color: transparent;
+    backdrop-filter: none;
+    padding: 0;
+    border-top: none;
+    box-shadow: none;
+    max-height: none;
+    overflow-y: visible;
+  }
+  .main-nav .nav-link {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: none;
+    font-size: 0.95rem;
+    font-weight: normal;
+  }
+  .main-nav .nav-link:hover,
+  .main-nav .nav-link.active {
+    background-color: transparent;
+    color: var(--primary-color);
+  }
+
+  .search-bar-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: auto;
+    right: 0;
+    bottom: auto;
+    width: 320px;
+    height: auto;
+    max-width: none;
+    border-radius: var(--button-radius);
+    padding: 0.5rem;
+    background-color: var(--card-background-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: block;
+    z-index: 1001;
+  }
+  .search-bar-dropdown.hidden {
+    display: none !important;
+  }
+  .search-input-wrapper {
+    margin-bottom: 0;
+  }
+  .search-input {
+    font-size: 0.875rem;
+    padding: 0.6rem 0.75rem;
+    padding-right: 5.5rem;
+    background-color: transparent;
+  }
+  .search-submit-btn,
+  .search-clear-btn {
+    padding: 0.6rem;
+  }
+
+  .hero-section {
+    height: calc(100vh - var(--header-height));
+    min-height: 500px;
+  }
+  .slider-title {
+    font-size: 2.5em;
+    bottom: 20px;
+  }
+
+  /* Content Card Sizing for tablet */
+  .content-card {
+    width: 180px; /* Adjusted to a fixed width for better fit */
+  }
+
+  /* Card UI Redesign for Tablet */
+  .card-action-btn.watchlist-toggle {
+    width: 2.2rem;
+    height: 2.2rem;
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+  .card-action-btn.play-centered {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.5rem;
+  }
+  .card-title-overlay {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .genre-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    text-align: left;
+  }
+  .footer-column {
+    margin-bottom: 0;
+  }
+  .social-links {
+    justify-content: flex-start;
+  }
+  .app-download-buttons {
+    align-items: flex-start;
+  }
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .copyright-text {
+    margin-bottom: 0;
+  }
+
+  /* Content Details Page - Tablet adjustments */
+  .movie-detail-banner {
+    height: 50vh; /* Slightly smaller height on tablet */
+    min-height: 400px;
+  }
+
+  .movie-detail-content-wrapper {
+    flex-direction: row; /* Keep in a row on tablet */
+    align-items: center;
+    gap: 1.5rem; /* Adjust gap */
+    text-align: left;
+  }
+
+  .movie-detail-poster {
+    width: 200px; /* Slightly smaller poster */
+  }
+
+  .movie-detail-info {
+    text-align: left;
+  }
+
+  .movie-detail-title {
+    font-size: 2rem; /* Slightly smaller title */
+    flex-direction: row; /* Keep title and icon in a row */
+    gap: 0.75rem;
+  }
+
+  .watchlist-icon-btn {
+    width: 2.5rem; /* Normal size icon button */
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .movie-detail-meta {
+    justify-content: flex-start; /* Left-align meta items */
+  }
+
+  .movie-detail-description,
+  .movie-detail-attributes p {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  /* Content Information Section */
+  .movie-info-section .info-grid {
+    align-items: flex-start; /* Left-align items on tablet */
+  }
+
+  .movie-info-section .info-item {
+    text-align: left; /* Left-align text within info items */
+  }
+
+  /* Download Section */
+  .download-section .section-title {
+    font-size: 1.4rem;
+  }
+  .download-subsection h3 {
+    font-size: 1.1rem;
+  }
+  .download-links .btn {
+    width: auto; /* Auto width on tablet */
+  }
+
+  /* Comment Section */
+  .comment-section {
+    max-width: 600px; /* Adjust width */
+  }
+
+  /* Responsive Screenshot Grid */
+  .screenshots-grid {
+    column-count: 3;
+  }
+}
+
+/* Larger Desktop */
+@media (min-width: 1024px) {
+  /* Hide mobile menu close button */
+  .close-mobile-menu-btn {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: none;
+  }
+  .main-nav {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    width: auto;
+    background-color: transparent;
+    backdrop-filter: none;
+    padding: 0;
+    border-top: none;
+    box-shadow: none;
+    max-height: none;
+    overflow-y: visible;
+  }
+  .main-nav .nav-link {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: none;
+    font-size: 0.95rem;
+    font-weight: normal;
+  }
+  .main-nav .nav-link:hover,
+  .main-nav .nav-link.active {
+    background-color: transparent;
+    color: var(--primary-color);
+  }
+
+  .search-bar-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: auto;
+    right: 0;
+    bottom: auto;
+    width: 288px;
+    height: auto;
+    max-width: none;
+    border-radius: var(--button-radius);
+    padding: 0.5rem;
+    background-color: var(--card-background-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: block;
+    z-index: 1001;
+  }
+  .search-bar-dropdown.hidden {
+    display: none !important;
+  }
+
+  .slider-title {
+    font-size: 2.5em;
+    bottom: 20px;
+  }
+
+  /* Content Card Sizing for desktop */
+  .content-card {
+    width: 200px; /* Adjusted to a fixed width for better fit */
+  }
+
+  /* Card UI Redesign for Desktop */
+  .card-action-btn.watchlist-toggle {
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 0.75rem;
+    left: 0.75rem;
+    font-size: 1.1rem;
+  }
+  .card-action-btn.play-centered {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.8rem;
+  }
+  .card-title-overlay {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .genre-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Content Details Page - Desktop adjustments */
+  .movie-detail-banner {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .movie-detail-content-wrapper {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    text-align: left;
+  }
+
+  .movie-detail-poster {
+    width: 250px;
+  }
+
+  .movie-detail-info {
+    text-align: left;
+  }
+
+  .movie-detail-title {
+    font-size: 2.5rem;
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+
+  .watchlist-icon-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .movie-detail-meta {
+    justify-content: flex-start;
+  }
+
+  .movie-detail-description,
+  .movie-detail-attributes p {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  /* Content Information Section */
+  .movie-info-section .info-grid {
+    align-items: flex-start; /* Left-align items on desktop */
+  }
+
+  .movie-info-section .info-item {
+    text-align: left; /* Left-align text within info items */
+  }
+
+  /* Download Section */
+  .download-section .section-title {
+    font-size: 1.5rem;
+  }
+  .download-subsection h3 {
+    font-size: 1.2rem;
+  }
+  .download-links .btn {
+    width: auto;
+  }
+
+  /* Comment Section */
+  .comment-section {
+    max-width: 700px; /* Max width on desktop */
+  }
+}
+
+@media (min-width: 1280px) {
+  .content-grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  .genre-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .screenshots-grid {
+    column-count: 1;
+  }
+}

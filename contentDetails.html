@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamVerse - Content Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <!-- Pre-loader, Notification Container, Header -->
+    <div id="preloader"><div class="spinner"></div></div>
+    <div id="notificationContainer"></div>
+    <div id="header-placeholder"></div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal-overlay hidden">
+      <div class="modal-content glass">
+        <button id="closeAuth" class="modal-close-btn">
+          <i class="ri-close-line ri-lg"></i>
+        </button>
+        <div class="modal-inner-content">
+          <div class="auth-icon-container">
+            <div class="auth-icon-wrapper">
+              <div class="auth-icon"><i class="ri-user-line ri-2x"></i></div>
+            </div>
+          </div>
+          <div class="auth-tabs">
+            <button id="loginTab" class="auth-tab active">Login</button
+            ><button id="signupTab" class="auth-tab">Sign Up</button>
+          </div>
+          <div id="loginForm" class="auth-form">
+            <div class="form-group">
+              <label class="form-label" for="login-email"
+                >Email or Username</label
+              ><input type="text" id="login-email" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="login-password">Password</label
+              ><input type="password" id="login-password" class="form-input" />
+            </div>
+            <div class="form-options">
+              <label class="custom-checkbox"
+                >Remember me<input type="checkbox" /><span
+                  class="checkmark"
+                ></span></label
+              ><a href="#" class="form-link">Forgot Password?</a>
+            </div>
+            <button class="btn btn-primary btn-full-width auth-submit-btn">
+              Login
+            </button>
+          </div>
+          <div id="signupForm" class="auth-form hidden">
+            <div class="form-group">
+              <label class="form-label" for="signup-username">Username</label
+              ><input type="text" id="signup-username" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="signup-email">Email</label
+              ><input type="email" id="signup-email" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="signup-password">Password</label
+              ><input type="password" id="signup-password" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="signup-confirm-password"
+                >Confirm Password</label
+              ><input
+                type="password"
+                id="signup-confirm-password"
+                class="form-input"
+              />
+            </div>
+            <div class="form-group">
+              <label class="custom-checkbox terms-checkbox"
+                >I agree to the
+                <a href="#" class="form-link">Terms of Service</a
+                ><input type="checkbox" /><span class="checkmark"></span
+              ></label>
+            </div>
+            <button class="btn btn-primary btn-full-width auth-submit-btn">
+              Sign Up
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container page-content">
+      <section id="contentDetailSection" class="movie-detail-section">
+        <div class="movie-detail-banner" id="movieDetailBanner">
+          <div class="movie-detail-overlay"></div>
+          <div class="container movie-detail-content-wrapper">
+            <div class="movie-detail-poster">
+              <img id="moviePoster" src="" alt="Content Poster" />
+            </div>
+            <div class="movie-detail-info">
+              <h1 class="movie-detail-title" id="movieDetailTitle">
+                <span id="contentTitleText"></span
+                ><button
+                  class="watchlist-icon-btn add-list-trigger"
+                  data-content-id=""
+                  title="Add to My List"
+                >
+                  <i class="ri-add-line"></i>
+                </button>
+              </h1>
+              <div class="movie-detail-meta">
+                <span id="contentYear"></span
+                ><span class="separator-dot">•</span
+                ><span id="contentDuration"></span
+                ><span class="separator-dot">•</span
+                ><span id="contentGenres"></span>
+              </div>
+              <p class="movie-detail-description" id="contentDescription"></p>
+              <div class="movie-detail-attributes">
+                <p>
+                  <strong>Languages:</strong>
+                  <span id="contentLanguages"></span>
+                </p>
+                <p>
+                  <strong>Quality:</strong> <span id="contentQuality"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="content-section movie-info-section">
+        <h2 class="section-title">Content Information</h2>
+        <div class="info-grid" id="contentInfoGrid">
+          <div class="info-item">
+            <strong>Director/Studio:</strong>
+            <span id="infoDirectorStudio">N/A</span>
+          </div>
+          <div class="info-item">
+            <strong>Cast:</strong> <span id="infoCast">N/A</span>
+          </div>
+          <div class="info-item">
+            <strong>Release Date:</strong> <span id="infoReleaseDate">N/A</span>
+          </div>
+          <div class="info-item">
+            <strong>Country:</strong> <span id="infoCountry">N/A</span>
+          </div>
+        </div>
+      </section>
+      <section class="content-section storyline-section">
+        <h2 class="section-title">Storyline</h2>
+        <p id="storylineText"></p>
+      </section>
+      <section class="content-section media-section">
+        <h2 class="section-title">Screenshots & Trailer</h2>
+        <div id="mediaContainer"></div>
+      </section>
+
+      <!-- Dynamic Download Section -->
+      <section class="content-section download-section">
+        <h2 class="section-title">Download Options</h2>
+        <div id="movieDownloadSection" class="hidden"></div>
+        <div id="seriesDownloadSection" class="hidden">
+          <div id="series-download-controls"></div>
+          <div id="series-zip-container"></div>
+        </div>
+      </section>
+
+      <section class="content-section related-content-section">
+        <div class="section-header">
+          <h2 class="section-title">Related Content</h2>
+          <a href="category.html" class="section-link" target="_blank"
+            >See All</a
+          >
+        </div>
+        <div class="content-row" id="relatedContentRow"></div>
+      </section>
+
+      <!-- Comment Section -->
+      <section class="content-section comment-section">
+        <h2 class="section-title">Comments & Requests</h2>
+        <div class="comment-form-container glass">
+          <p class="comment-login-prompt hidden" id="commentLoginPrompt">
+            Please <a href="#" id="commentLoginLink">log in</a> to leave a
+            comment or request.
+          </p>
+          <form id="commentForm" class="hidden">
+            <div id="comment-email-group" class="form-group hidden">
+              <label class="form-label" for="comment-email">Posting as</label
+              ><input
+                type="email"
+                id="comment-email"
+                class="form-input"
+                readonly
+              />
+            </div>
+            <input type="hidden" id="comment-username" />
+            <div class="form-group">
+              <label class="form-label" for="comment-type">Type</label>
+              <div id="comment-type-dropdown-placeholder"></div>
+            </div>
+            <div class="form-group">
+              <textarea
+                id="comment-text"
+                class="form-input"
+                rows="5"
+                placeholder="Your message..."
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              id="commentSubmitBtn"
+              class="btn btn-primary btn-full-width"
+            >
+              Submit
+            </button>
+          </form>
+          <div class="comment-tabs">
+            <button class="comment-tab active" data-tab="comments">
+              Comments</button
+            ><button class="comment-tab" data-tab="requests">Requests</button>
+          </div>
+          <div class="comments-container">
+            <div id="commentsList" class="comment-tab-content active"></div>
+            <div id="requestsList" class="comment-tab-content"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Screenshot Lightbox & Footer -->
+    <div id="screenshotLightbox" class="lightbox-overlay hidden">
+      <button id="closeLightboxBtn" class="lightbox-close-btn">
+        <i class="ri-close-line"></i></button
+      ><img id="lightboxImage" src="" alt="Expanded Screenshot" />
+    </div>
+    <div id="footer-placeholder"></div>
+
+    <!-- FIXED: Replaced all old script tags with a single module script -->
+    <script type="module" src="js/contentDetails.js"></script>
+  </body>
+</html>

@@ -1,0 +1,215 @@
+/* admin/css/admin-responsive.css */
+
+/* --- Tablet and Smaller Screens (Up to 1024px) --- */
+@media (max-width: 1024px) {
+  .admin-container {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .admin-main-content {
+    padding: 1.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .media-management-grid {
+    /* Switch to single column earlier for media page */
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Mobile Screens (Up to 768px) --- */
+@media (max-width: 768px) {
+  .admin-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main";
+  }
+
+  /* --- Sidebar Management --- */
+  .admin-sidebar {
+    grid-area: unset;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    z-index: 1001;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+  }
+
+  .sidebar-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* --- Header Adjustments --- */
+  .admin-header {
+    padding: 0 1rem;
+  }
+
+  .admin-logo span {
+    display: none;
+  }
+
+  .sidebar-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 0.75rem;
+  }
+
+  /* --- Main Content & Toolbar --- */
+  .admin-main-content {
+    padding: 1rem;
+  }
+
+  .page-header {
+    margin-bottom: 1.5rem;
+  }
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .content-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .main-actions {
+    flex-wrap: wrap;
+  }
+
+  /* --- Dashboard Stats --- */
+  .dashboard-stats-grid {
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  /* --- Data Table Transformation (for Content, Comments, Requests) --- */
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table tr {
+    display: block;
+    border: 1px solid var(--border-color-medium);
+    border-radius: var(--modal-radius);
+    margin-bottom: 1rem;
+    padding: 0;
+  }
+
+  .data-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color-light);
+    min-height: 48px;
+    text-align: right;
+  }
+
+  .data-table .table-poster-cell {
+    width: auto; /* Reset desktop width */
+  }
+
+  .data-table tr td:last-child {
+    border-bottom: none;
+  }
+
+  .data-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-muted-color);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding-right: 1rem;
+    text-align: left;
+  }
+
+  .table-poster {
+    width: 50px;
+    height: 75px;
+    border-radius: 4px;
+    object-fit: cover;
+    flex-shrink: 0; /* Prevents image from shrinking */
+  }
+
+  .action-buttons {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+
+  /* --- Media Management Page --- */
+  .media-card {
+    padding: 1rem;
+  }
+
+  .form-group-grid-small {
+    /* Stack form for adding media */
+    grid-template-columns: 1fr;
+  }
+
+  .form-group-grid-small .btn {
+    /* Make button full width */
+    grid-column: 1 / -1;
+  }
+
+  .episode-info {
+    /* Allow episode info to wrap */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .episode-info .ep-url {
+    max-width: 100%; /* Allow URL to take more space */
+  }
+
+  /* --- Modal Adjustments --- */
+  .admin-modal {
+    width: 95%;
+    max-height: 85vh;
+  }
+
+  .admin-modal h2,
+  .admin-modal form > .form-group,
+  .admin-modal form > .form-group-grid,
+  .form-actions {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* NEW: Add this class to the end of your file */
+body.no-scroll,
+body.no-scroll-modal {
+  overflow: hidden;
+}

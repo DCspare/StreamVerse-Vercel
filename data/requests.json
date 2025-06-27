@@ -1,0 +1,78 @@
+[
+  {
+    "id": "req-1750052802202",
+    "contentId": "the-boys",
+    "status": "pending",
+    "user": {
+      "name": "Hacky",
+      "email": "hack@gmail.com"
+    },
+    "text": "Upload more seasons",
+    "date": "2025-06-16T05:46:42.202Z",
+    "replies": []
+  },
+  {
+    "id": "comment-1749633217375",
+    "contentId": "interstellar",
+    "status": "pending",
+    "type": "request",
+    "user": {
+      "name": "gg",
+      "email": "g@gmail.com"
+    },
+    "text": "ddddd",
+    "date": "2025-06-11T09:13:36.630Z",
+    "replies": []
+  },
+  {
+    "id": "comment-1749633289301",
+    "contentId": "interstellar",
+    "status": "pending",
+    "type": "request",
+    "user": {
+      "name": "gg",
+      "email": "g@gmail.com"
+    },
+    "text": "ssssssss",
+    "date": "2025-06-11T09:14:48.564Z",
+    "replies": []
+  },
+  {
+    "id": "comment-1678886500000",
+    "contentId": "interstellar",
+    "status": "pending",
+    "type": "request",
+    "user": {
+      "name": "Bob",
+      "email": "bob@example.com"
+    },
+    "text": "Could you please add the director's cut or any behind-the-scenes footage?",
+    "date": "2023-03-15T12:01:40Z",
+    "replies": [
+      {
+        "adminName": "StreamVerse Admin",
+        "text": "Great suggestion! We've added it to our list of future additions. Thanks for the feedback!",
+        "date": "2023-03-16T09:30:00Z"
+      }
+    ]
+  },
+  {
+    "id": "comment-1681584000000",
+    "contentId": "attack-on-titan",
+    "status": "pending",
+    "type": "request",
+    "user": {
+      "name": "David",
+      "email": "david@example.com"
+    },
+    "text": "When will the final final FINAL part be available in 4K?",
+    "date": "2023-04-15T16:00:00Z",
+    "replies": [
+      {
+        "adminName": "StreamVerse Admin",
+        "text": "We are working on sourcing the highest quality as soon as it's released. Stay tuned!",
+        "date": "2023-04-16T10:00:00Z"
+      }
+    ]
+  }
+]
