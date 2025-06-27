@@ -1,4 +1,4 @@
-// server.js (Corrected Final Version for Vercel Deployment)
+// server.js (DEFINITIVE FINAL VERSION FOR VERCEL)
 
 const express = require("express");
 const fs = require("fs");
@@ -8,9 +8,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // --- Middleware ---
-app.use(express.json()); // Body parser for API requests
+app.use(express.json());
 
-// --- Helper Functions ---
+// --- Helper Functions --- (Unchanged)
 function readJsonFile(filePath) {
   try {
     if (!fs.existsSync(filePath)) { return null; }
@@ -22,7 +22,6 @@ function readJsonFile(filePath) {
     return null;
   }
 }
-
 function writeJsonFile(filePath, data) {
   try {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
@@ -32,7 +31,6 @@ function writeJsonFile(filePath, data) {
     return false;
   }
 }
-
 function generateUniqueSlug(title, existingContent) {
   let baseSlug = title.toLowerCase().replace(/[^\w\s-]/g, "").replace(/[\s_]+/g, "-").replace(/^-+|-+$/g, "");
   let slug = baseSlug;
@@ -44,14 +42,12 @@ function generateUniqueSlug(title, existingContent) {
   return slug;
 }
 
-// --- API Endpoints ---
-// This entire section is unchanged.
+// --- API Endpoints --- (Unchanged)
 app.get("/api/content", (req, res) => {
   const content = readJsonFile(path.join(__dirname, "data", "content.json"));
   if (content) res.json(content);
   else res.status(500).json({ error: "Could not read content data." });
 });
-
 app.get("/api/media/:id", (req, res) => {
   const contentId = req.params.id;
   const mediaPath = path.join(__dirname, "data", "media.json");
@@ -65,14 +61,12 @@ app.get("/api/media/:id", (req, res) => {
     res.json({ trailers: {}, screenshots: [], downloadLinks: {} });
   }
 });
-
 app.get("/api/episodes/:id", (req, res) => {
   const contentId = req.params.id;
   const episodesPath = path.join(__dirname, "data", "episodes.json");
   const allEpisodes = readJsonFile(episodesPath);
   if (!allEpisodes)
     return res.status(500).json({ error: "Could not read episodes data." });
-
   const contentEpisodes = allEpisodes[contentId];
   if (contentEpisodes) {
     res.json(contentEpisodes);
@@ -80,7 +74,6 @@ app.get("/api/episodes/:id", (req, res) => {
     res.json({ seasons: {}, zipFiles: [] });
   }
 });
-
 app.post("/api/content", (req, res) => {
   const data = req.body;
   if (!data.title || !data.type || !data.year) {
@@ -128,7 +121,6 @@ app.post("/api/content", (req, res) => {
   if (success) res.status(201).json(newContent);
   else res.status(500).json({ error: "Failed to save new content." });
 });
-
 app.put("/api/content/:id", (req, res) => {
   const contentId = req.params.id;
   const updatedData = req.body;
@@ -160,7 +152,6 @@ app.put("/api/content/:id", (req, res) => {
     res.status(500).json({ error: "Failed to save updated content." });
   }
 });
-
 app.delete("/api/content/:id", (req, res) => {
   const contentId = req.params.id;
   const contentPath = path.join(__dirname, "data", "content.json");
@@ -198,7 +189,6 @@ app.delete("/api/content/:id", (req, res) => {
       .status(500)
       .json({ error: "Failed to write updated data to one or more files." });
 });
-
 app.delete("/api/content/bulk", (req, res) => {
   const { ids } = req.body;
   if (!ids || !Array.isArray(ids) || ids.length === 0) {
@@ -250,7 +240,6 @@ app.delete("/api/content/bulk", (req, res) => {
       .json({ error: "Failed to write updated data to one or more files." });
   }
 });
-
 app.post("/api/content/bulk", (req, res) => {
   const newContentArray = req.body;
   if (!Array.isArray(newContentArray)) {
@@ -310,7 +299,6 @@ app.post("/api/content/bulk", (req, res) => {
     res.status(500).json({ error: "Failed to save new content." });
   }
 });
-
 app.post("/api/media/:id/:type", (req, res) => {
   const { id, type } = req.params;
   const mediaPath = path.join(__dirname, "data", "media.json");
@@ -333,7 +321,6 @@ app.post("/api/media/:id/:type", (req, res) => {
     res.status(500).json({ error: "Failed to save media." });
   }
 });
-
 app.delete("/api/media/:id/:type", (req, res) => {
   const { id, type } = req.params;
   const { key } = req.body;
@@ -357,7 +344,6 @@ app.delete("/api/media/:id/:type", (req, res) => {
     res.status(500).json({ error: "Failed to save media." });
   }
 });
-
 app.post("/api/episodes/:id/seasons", (req, res) => {
   const { id } = req.params;
   const { seasonNumber } = req.body;
@@ -383,7 +369,6 @@ app.post("/api/episodes/:id/seasons", (req, res) => {
     res.status(500).json({ error: "Failed to save new season." });
   }
 });
-
 app.delete("/api/episodes/:id/seasons/:seasonNumber", (req, res) => {
   const { id, seasonNumber } = req.params;
   const episodesPath = path.join(__dirname, "data", "episodes.json");
@@ -400,7 +385,6 @@ app.delete("/api/episodes/:id/seasons/:seasonNumber", (req, res) => {
     res.status(500).json({ error: "Failed to delete season." });
   }
 });
-
 app.post("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
   const { id, seasonNumber } = req.params;
   const { episodeNumber, title, quality, downloadUrl } = req.body;
@@ -436,7 +420,6 @@ app.post("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
     res.status(500).json({ error: "Failed to save episode." });
   }
 });
-
 app.put("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
   const { id, seasonNumber } = req.params;
   const { originalQuality, originalEpisodeNumber, updatedEpisode } = req.body;
@@ -493,7 +476,6 @@ app.put("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
     res.status(500).json({ error: "Failed to update episode." });
   }
 });
-
 app.delete("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
   const { id, seasonNumber } = req.params;
   const { key } = req.body;
@@ -526,7 +508,6 @@ app.delete("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
     res.status(500).json({ error: "Failed to delete episode." });
   }
 });
-
 app.get("/api/comments/:contentId", (req, res) => {
   const { contentId } = req.params;
   const commentsPath = path.join(__dirname, "data", "comments.json");
@@ -552,7 +533,6 @@ app.get("/api/comments/:contentId", (req, res) => {
   combinedSubmissions.forEach((sub) => delete sub.sortDate);
   res.json(combinedSubmissions);
 });
-
 app.post("/api/comments/:contentId", (req, res) => {
   const { contentId } = req.params;
   const { user, text } = req.body;
@@ -579,7 +559,6 @@ app.post("/api/comments/:contentId", (req, res) => {
     res.status(500).json({ error: "Failed to save comment." });
   }
 });
-
 app.get("/api/comments_all", (req, res) => {
   const commentsData = readJsonFile(
     path.join(__dirname, "data", "comments.json")
@@ -612,7 +591,6 @@ app.get("/api/comments_all", (req, res) => {
   allComments.sort((a, b) => new Date(b.date) - new Date(a.date));
   res.json(allComments);
 });
-
 app.post("/api/comments/:contentId/reply", (req, res) => {
   const { contentId } = req.params;
   const { commentId, replyText } = req.body;
@@ -650,7 +628,6 @@ app.post("/api/comments/:contentId/reply", (req, res) => {
     res.status(500).json({ error: "Failed to save reply." });
   }
 });
-
 app.delete("/api/comments/:contentId/:commentId", (req, res) => {
   const { contentId, commentId } = req.params;
   const commentsPath = path.join(__dirname, "data", "comments.json");
@@ -673,7 +650,6 @@ app.delete("/api/comments/:contentId/:commentId", (req, res) => {
     res.status(500).json({ error: "Failed to delete comment." });
   }
 });
-
 app.post("/api/requests", (req, res) => {
   const { user, text, contentId } = req.body;
   if (!user || !text) {
@@ -697,13 +673,11 @@ app.post("/api/requests", (req, res) => {
     res.status(500).json({ error: "Failed to save request." });
   }
 });
-
 app.get("/api/requests", (req, res) => {
   const requests =
     readJsonFile(path.join(__dirname, "data", "requests.json")) || [];
   res.json(requests);
 });
-
 app.post("/api/requests/:id/reply", (req, res) => {
   const requestId = req.params.id;
   const { replyText } = req.body;
@@ -731,7 +705,6 @@ app.post("/api/requests/:id/reply", (req, res) => {
     res.status(500).json({ error: "Failed to save reply." });
   }
 });
-
 app.delete("/api/requests/:id", (req, res) => {
   const requestId = req.params.id;
   const requestsPath = path.join(__dirname, "data", "requests.json");
@@ -748,21 +721,22 @@ app.delete("/api/requests/:id", (req, res) => {
   }
 });
 
-
 // =========================================================================
-// === CORRECTED AND FINAL ROUTING SECTION =================================
+// === CORRECTED AND FINAL ROUTING SECTION FOR VERCEL ======================
 // =========================================================================
-
-// Serve all static files from the project root.
-// This is the most important line for serving CSS, JS, images, templates, and even the .html files themselves.
-// It must come before the other routes that might catch the same paths.
-app.use(express.static(path.join(__dirname))); 
+// The `vercel.json`'s "filesystem" rule handles serving all physical files.
+// This server code only needs to handle requests that DON'T map to a file.
 
 // This handles the Admin Panel Single Page Application (SPA).
-// Any request that starts with /admin/ will be served the admin/index.html file,
-// letting the client-side router handle the rest.
+// A request for "/admin" or "/admin/anything" gets the SPA's host page.
 app.get("/admin/*", (req, res) => {
   res.sendFile(path.join(__dirname, "admin", "index.html"));
+});
+
+// This explicitly handles the request for the homepage "/".
+// Vercel's filesystem rule doesn't match "/" to a file, so it gets sent here.
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 
