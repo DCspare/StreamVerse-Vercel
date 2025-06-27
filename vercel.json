@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "server.js",
@@ -6,12 +7,12 @@
     }
   ],
   "routes": [
-    { "src": "/css/(.*)", "dest": "/css/$1" },
-    { "src": "/js/(.*)", "dest": "/js/$1" },
-    { "src": "/templates/(.*)", "dest": "/templates/$1" },
-    { "src": "/admin/(.*)", "dest": "/admin/$1" },
-    { "src": "/data/(.*)", "dest": "/data/$1" },
-
-    { "src": "/(.*)", "dest": "server.js" }
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
   ]
 }
