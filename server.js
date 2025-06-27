@@ -861,8 +861,11 @@ app.delete("/api/requests/:id", (req, res) => {
   }
 });
 
-// --- Static File Serving ---
-app.use(express.static(path.join(__dirname)));
+// Serve static files from their specific directories
+app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/templates', express.static(path.join(__dirname, 'templates')));
+app.use('/admin', express.static(path.join(__dirname, 'admin')));
 
 // NEW: Add a route specifically for the homepage
 app.get('/', (req, res) => {
