@@ -1,37 +1,29 @@
-// server.js (Corrected and Final Version)
+// server.js (Corrected Final Version for Vercel Deployment)
 
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // Use Vercel's provided PORT
 
 // --- Middleware ---
 app.use(express.json()); // Body parser for API requests
 
 // --- Helper Functions ---
-// [FIXED] This function is now more robust and handles empty files gracefully.
 function readJsonFile(filePath) {
   try {
-    // First, check if the file even exists.
     if (!fs.existsSync(filePath)) {
-      return null; // Return null if file doesn't exist, which the code handles.
+      return null; 
     }
-
     const data = fs.readFileSync(filePath, "utf8");
-
-    // If the file is empty or just contains whitespace, it's not valid JSON.
-    // Treat it as if it were null so the rest of the code creates a new array.
     if (data.trim() === "") {
       return null;
     }
-
-    // Only attempt to parse if the file has content.
     return JSON.parse(data);
   } catch (error) {
     console.error(`Error reading or parsing file: ${filePath}`, error);
-    return null; // Return null on any other errors.
+    return null;
   }
 }
 
@@ -61,7 +53,6 @@ function generateUniqueSlug(title, existingContent) {
 }
 
 // --- API Endpoints ---
-// (The rest of the file is identical to the last complete version I provided)
 app.get("/api/content", (req, res) => {
   const content = readJsonFile(path.join(__dirname, "data", "content.json"));
   if (content) res.json(content);
@@ -215,7 +206,6 @@ app.delete("/api/content/:id", (req, res) => {
       .json({ error: "Failed to write updated data to one or more files." });
 });
 
-// NEW: Bulk delete content
 app.delete("/api/content/bulk", (req, res) => {
   const { ids } = req.body;
   if (!ids || !Array.isArray(ids) || ids.length === 0) {
@@ -223,45 +213,36 @@ app.delete("/api/content/bulk", (req, res) => {
       .status(400)
       .json({ error: "An array of content IDs is required." });
   }
-
   const contentPath = path.join(__dirname, "data", "content.json");
   const mediaPath = path.join(__dirname, "data", "media.json");
   const episodesPath = path.join(__dirname, "data", "episodes.json");
   const commentsPath = path.join(__dirname, "data", "comments.json");
-
   const content = readJsonFile(contentPath);
   const media = readJsonFile(mediaPath);
   const episodes = readJsonFile(episodesPath);
   const comments = readJsonFile(commentsPath);
-
   if (!content || !media || !episodes || !comments) {
     return res
       .status(500)
       .json({ error: "Could not read one or more data files." });
   }
-
   const initialLength = content.length;
   const filteredContent = content.filter((c) => !ids.includes(c.id));
-
   if (filteredContent.length === initialLength) {
     return res
       .status(404)
       .json({ error: "None of the provided IDs were found." });
   }
-
-  // Remove associated data
   ids.forEach((id) => {
     delete media[id];
     delete episodes[id];
     delete comments[id];
   });
-
   const success =
     writeJsonFile(contentPath, filteredContent) &&
     writeJsonFile(mediaPath, media) &&
     writeJsonFile(episodesPath, episodes) &&
     writeJsonFile(commentsPath, comments);
-
   if (success) {
     res
       .status(200)
@@ -277,7 +258,6 @@ app.delete("/api/content/bulk", (req, res) => {
   }
 });
 
-// NEW: Bulk add content
 app.post("/api/content/bulk", (req, res) => {
   const newContentArray = req.body;
   if (!Array.isArray(newContentArray)) {
@@ -285,7 +265,6 @@ app.post("/api/content/bulk", (req, res) => {
       .status(400)
       .json({ error: "Request body must be an array of content objects." });
   }
-
   const contentPath = path.join(__dirname, "data", "content.json");
   const content = readJsonFile(contentPath) || [];
   const mediaPath = path.join(__dirname, "data", "media.json");
@@ -294,15 +273,12 @@ app.post("/api/content/bulk", (req, res) => {
   const media = readJsonFile(mediaPath) || {};
   const episodes = readJsonFile(episodesPath) || {};
   const comments = readJsonFile(commentsPath) || {};
-
   let addedCount = 0;
   const addedItems = [];
-
   for (const data of newContentArray) {
     if (!data.title || !data.type || !data.year) {
-      continue; // Skip invalid items
+      continue;
     }
-
     const newId = generateUniqueSlug(data.title, content.concat(addedItems));
     const newContent = {
       id: newId,
@@ -314,29 +290,22 @@ app.post("/api/content/bulk", (req, res) => {
       rating: parseFloat(data.rating) || 0,
       duration: data.duration || null,
       storyline: data.storyline || "",
-      ...data, // Include any other valid fields provided
+      ...data,
     };
-
     addedItems.push(newContent);
-
     media[newContent.id] = { trailers: {}, screenshots: [], downloadLinks: {} };
     if (["webseries", "animes"].includes(newContent.type)) {
       episodes[newContent.id] = { seasons: {}, zipFiles: [] };
     }
     comments[newContent.id] = [];
-
     addedCount++;
   }
-
-  // Add all new items to the beginning of the content array
   content.unshift(...addedItems);
-
   const success =
     writeJsonFile(contentPath, content) &&
     writeJsonFile(mediaPath, media) &&
     writeJsonFile(episodesPath, episodes) &&
     writeJsonFile(commentsPath, comments);
-
   if (success) {
     res
       .status(201)
@@ -399,14 +368,11 @@ app.delete("/api/media/:id/:type", (req, res) => {
 app.post("/api/episodes/:id/seasons", (req, res) => {
   const { id } = req.params;
   const { seasonNumber } = req.body;
-
   if (!seasonNumber || isNaN(parseInt(seasonNumber))) {
     return res.status(400).json({ error: "Valid season number is required." });
   }
-
   const episodesPath = path.join(__dirname, "data", "episodes.json");
   const allEpisodes = readJsonFile(episodesPath);
-
   if (!allEpisodes[id]) {
     allEpisodes[id] = { seasons: {}, zipFiles: [] };
   }
@@ -415,9 +381,7 @@ app.post("/api/episodes/:id/seasons", (req, res) => {
       .status(409)
       .json({ error: `Season ${seasonNumber} already exists.` });
   }
-
   allEpisodes[id].seasons[seasonNumber] = { qualities: {} };
-
   if (writeJsonFile(episodesPath, allEpisodes)) {
     res
       .status(201)
@@ -431,13 +395,10 @@ app.delete("/api/episodes/:id/seasons/:seasonNumber", (req, res) => {
   const { id, seasonNumber } = req.params;
   const episodesPath = path.join(__dirname, "data", "episodes.json");
   const allEpisodes = readJsonFile(episodesPath);
-
   if (!allEpisodes[id] || !allEpisodes[id].seasons[seasonNumber]) {
     return res.status(404).json({ error: "Season not found." });
   }
-
   delete allEpisodes[id].seasons[seasonNumber];
-
   if (writeJsonFile(episodesPath, allEpisodes)) {
     res
       .status(200)
@@ -450,23 +411,18 @@ app.delete("/api/episodes/:id/seasons/:seasonNumber", (req, res) => {
 app.post("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
   const { id, seasonNumber } = req.params;
   const { episodeNumber, title, quality, downloadUrl } = req.body;
-
   if (!episodeNumber || !title || !quality || !downloadUrl) {
     return res.status(400).json({ error: "Missing required episode data." });
   }
-
   const episodesPath = path.join(__dirname, "data", "episodes.json");
   const allEpisodes = readJsonFile(episodesPath);
-
   const season = allEpisodes[id]?.seasons?.[seasonNumber];
   if (!season) {
     return res.status(404).json({ error: "Season not found." });
   }
-
   if (!season.qualities[quality]) {
     season.qualities[quality] = [];
   }
-
   if (
     season.qualities[quality].some((ep) => ep.episodeNumber == episodeNumber)
   ) {
@@ -474,16 +430,13 @@ app.post("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
       error: `Episode ${episodeNumber} already exists for ${quality}.`,
     });
   }
-
   const newEpisode = {
     episodeNumber: parseInt(episodeNumber, 10),
     title,
     downloadUrl,
   };
-
   season.qualities[quality].push(newEpisode);
   season.qualities[quality].sort((a, b) => a.episodeNumber - b.episodeNumber);
-
   if (writeJsonFile(episodesPath, allEpisodes)) {
     res.status(201).json({ message: "Episode added successfully." });
   } else {
@@ -494,22 +447,18 @@ app.post("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
 app.put("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
   const { id, seasonNumber } = req.params;
   const { originalQuality, originalEpisodeNumber, updatedEpisode } = req.body;
-
   if (!originalQuality || !originalEpisodeNumber || !updatedEpisode) {
     return res.status(400).json({ error: "Missing required data for update." });
   }
-
   const episodesPath = path.join(__dirname, "data", "episodes.json");
   const allEpisodes = readJsonFile(episodesPath);
   const season = allEpisodes[id]?.seasons?.[seasonNumber];
   if (!season) return res.status(404).json({ error: "Season not found." });
-
   const originalQualityArray = season.qualities[originalQuality];
   if (!originalQualityArray)
     return res
       .status(404)
       .json({ error: `Quality '${originalQuality}' not found.` });
-
   const episodeIndex = originalQualityArray.findIndex(
     (ep) => ep.episodeNumber == originalEpisodeNumber
   );
@@ -517,11 +466,9 @@ app.put("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
     return res
       .status(404)
       .json({ error: `Episode ${originalEpisodeNumber} not found.` });
-
   const newQuality = updatedEpisode.quality;
   updatedEpisode.episodeNumber = parseInt(updatedEpisode.episodeNumber, 10);
   const { quality, ...epData } = updatedEpisode;
-
   const targetQualityArray = season.qualities[newQuality] || [];
   if (
     (originalQuality !== newQuality ||
@@ -534,7 +481,6 @@ app.put("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
       error: `Episode ${updatedEpisode.episodeNumber} already exists in ${newQuality}.`,
     });
   }
-
   if (originalQuality === newQuality) {
     originalQualityArray[episodeIndex] = epData;
     originalQualityArray.sort((a, b) => a.episodeNumber - b.episodeNumber);
@@ -548,7 +494,6 @@ app.put("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
       (a, b) => a.episodeNumber - b.episodeNumber
     );
   }
-
   if (writeJsonFile(episodesPath, allEpisodes)) {
     res.status(200).json({ message: "Episode updated successfully." });
   } else {
@@ -559,22 +504,17 @@ app.put("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
 app.delete("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
   const { id, seasonNumber } = req.params;
   const { key } = req.body;
-
   if (!key || key.indexOf(":") === -1) {
     return res
       .status(400)
       .json({ error: "Invalid key format for episode deletion." });
   }
-
   const [quality, episodeIndex] = key.split(":");
   const index = parseInt(episodeIndex, 10);
-
   const episodesPath = path.join(__dirname, "data", "episodes.json");
   const allEpisodes = readJsonFile(episodesPath);
-
   const qualityArray =
     allEpisodes[id]?.seasons?.[seasonNumber]?.qualities?.[quality];
-
   if (
     !qualityArray ||
     isNaN(index) ||
@@ -583,13 +523,10 @@ app.delete("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
   ) {
     return res.status(404).json({ error: "Episode not found." });
   }
-
   qualityArray.splice(index, 1);
-
   if (qualityArray.length === 0) {
     delete allEpisodes[id].seasons[seasonNumber].qualities[quality];
   }
-
   if (writeJsonFile(episodesPath, allEpisodes)) {
     res.status(200).json({ message: "Episode deleted successfully." });
   } else {
@@ -597,73 +534,52 @@ app.delete("/api/episodes/:id/seasons/:seasonNumber/episodes", (req, res) => {
   }
 });
 
-// --- COMMENTS & REQUESTS API ---
-
-// [FIX #2A] GET all comments AND requests for a specific content ID
 app.get("/api/comments/:contentId", (req, res) => {
   const { contentId } = req.params;
   const commentsPath = path.join(__dirname, "data", "comments.json");
   const requestsPath = path.join(__dirname, "data", "requests.json");
-
   const allCommentsData = readJsonFile(commentsPath) || {};
   const allRequestsData = readJsonFile(requestsPath) || [];
-
-  // Get comments for the specific content ID and ensure they have a 'type'
   const contentComments = (allCommentsData[contentId] || []).map((c) => ({
     ...c,
     type: "comment",
-    sortDate: c.date || "1970-01-01T00:00:00.000Z", // Use 'date' for sorting
+    sortDate: c.date || "1970-01-01T00:00:00.000Z",
   }));
-
-  // Filter requests for the specific content ID and ensure they have a 'type'
   const contentRequests = allRequestsData
     .filter((r) => r.contentId === contentId)
     .map((r) => ({
       ...r,
       type: "request",
-      sortDate: r.date || "1970-01-01T00:00:00.000Z", // Use 'date' for sorting
+      sortDate: r.date || "1970-01-01T00:00:00.000Z",
     }));
-
-  // Combine both arrays
   const combinedSubmissions = [...contentComments, ...contentRequests];
-
-  // Sort the combined array by date, most recent first
   combinedSubmissions.sort(
     (a, b) => new Date(b.sortDate) - new Date(a.sortDate)
   );
-
-  // Remove the temporary sortDate property before sending to client
   combinedSubmissions.forEach((sub) => delete sub.sortDate);
-
   res.json(combinedSubmissions);
 });
 
 app.post("/api/comments/:contentId", (req, res) => {
   const { contentId } = req.params;
   const { user, text } = req.body;
-
   if (!user || !text) {
     return res.status(400).json({ error: "User and text are required." });
   }
-
   const commentsPath = path.join(__dirname, "data", "comments.json");
   const allComments = readJsonFile(commentsPath) || {};
-
   if (!allComments[contentId]) {
     allComments[contentId] = [];
   }
-
   const newComment = {
     id: `comment-${Date.now()}`,
-    type: "comment", // Ensure type is explicitly set
-    user: user, // user is an object with name and email
+    type: "comment",
+    user: user,
     text,
     date: new Date().toISOString(),
     replies: [],
   };
-
   allComments[contentId].unshift(newComment);
-
   if (writeJsonFile(commentsPath, allComments)) {
     res.status(201).json(newComment);
   } else {
@@ -681,12 +597,10 @@ app.get("/api/comments_all", (req, res) => {
   if (!commentsData || !contentData) {
     return res.status(500).json({ error: "Could not read data files." });
   }
-
   const contentMap = contentData.reduce((map, content) => {
     map[content.id] = content.title;
     return map;
   }, {});
-
   const allComments = [];
   for (const contentId in commentsData) {
     if (commentsData.hasOwnProperty(contentId)) {
@@ -714,35 +628,29 @@ app.post("/api/comments/:contentId/reply", (req, res) => {
       .status(400)
       .json({ error: "Comment ID and reply text are required." });
   }
-
   const commentsPath = path.join(__dirname, "data", "comments.json");
   const allComments = readJsonFile(commentsPath);
   if (!allComments[contentId]) {
     return res.status(404).json({ error: "Content not found." });
   }
-
   const commentIndex = allComments[contentId].findIndex(
     (c) =>
       (c.id ||
         `${new Date(c.date).getTime()}-${allComments[contentId].indexOf(c)}`) ==
       commentId
   );
-
   if (commentIndex === -1) {
     return res.status(404).json({ error: "Comment not found." });
   }
-
   if (!allComments[contentId][commentIndex].replies) {
     allComments[contentId][commentIndex].replies = [];
   }
-
   const newReply = {
     user: "Admin",
     text: replyText,
     date: new Date().toISOString(),
   };
   allComments[contentId][commentIndex].replies.push(newReply);
-
   if (writeJsonFile(commentsPath, allComments)) {
     res.status(201).json(newReply);
   } else {
@@ -754,22 +662,18 @@ app.delete("/api/comments/:contentId/:commentId", (req, res) => {
   const { contentId, commentId } = req.params;
   const commentsPath = path.join(__dirname, "data", "comments.json");
   const allComments = readJsonFile(commentsPath);
-
   if (!allComments[contentId]) {
     return res.status(404).json({ error: "Content not found." });
   }
-
   const originalLength = allComments[contentId].length;
   const commentIdentifier = (c, index) =>
     c.id || `${new Date(c.date).getTime()}-${index}`;
   allComments[contentId] = allComments[contentId].filter(
     (c, index) => commentIdentifier(c, index) != commentId
   );
-
   if (allComments[contentId].length === originalLength) {
     return res.status(404).json({ error: "Comment not found." });
   }
-
   if (writeJsonFile(commentsPath, allComments)) {
     res.status(200).json({ message: "Comment deleted successfully." });
   } else {
@@ -777,7 +681,6 @@ app.delete("/api/comments/:contentId/:commentId", (req, res) => {
   }
 });
 
-// --- REQUESTS API ---
 app.post("/api/requests", (req, res) => {
   const { user, text, contentId } = req.body;
   if (!user || !text) {
@@ -785,17 +688,15 @@ app.post("/api/requests", (req, res) => {
   }
   const requestsPath = path.join(__dirname, "data", "requests.json");
   const requests = readJsonFile(requestsPath) || [];
-
   const newRequest = {
     id: `req-${Date.now()}`,
     contentId: contentId || "N/A",
     status: "pending",
-    user: user, // user is an object with name and email
+    user: user,
     text,
     date: new Date().toISOString(),
     replies: [],
   };
-
   requests.unshift(newRequest);
   if (writeJsonFile(requestsPath, requests)) {
     res.status(201).json(newRequest);
@@ -819,22 +720,18 @@ app.post("/api/requests/:id/reply", (req, res) => {
   const requestsPath = path.join(__dirname, "data", "requests.json");
   const requests = readJsonFile(requestsPath) || [];
   const requestIndex = requests.findIndex((r) => r.id === requestId);
-
   if (requestIndex === -1) {
     return res.status(404).json({ error: "Request not found." });
   }
-
   if (!requests[requestIndex].replies) {
     requests[requestIndex].replies = [];
   }
-
   const newReply = {
     user: "Admin",
     text: replyText,
     date: new Date().toISOString(),
   };
   requests[requestIndex].replies.push(newReply);
-
   if (writeJsonFile(requestsPath, requests)) {
     res.status(201).json(newReply);
   } else {
@@ -846,14 +743,11 @@ app.delete("/api/requests/:id", (req, res) => {
   const requestId = req.params.id;
   const requestsPath = path.join(__dirname, "data", "requests.json");
   const requests = readJsonFile(requestsPath) || [];
-
   const initialLength = requests.length;
   const filteredRequests = requests.filter((r) => r.id !== requestId);
-
   if (filteredRequests.length === initialLength) {
     return res.status(404).json({ error: "Request not found." });
   }
-
   if (writeJsonFile(requestsPath, filteredRequests)) {
     res.status(200).json({ message: "Request deleted successfully." });
   } else {
@@ -861,16 +755,37 @@ app.delete("/api/requests/:id", (req, res) => {
   }
 });
 
-// --- Page Serving Routes ---
 
+// =========================================================================
+// === FINAL AND CORRECT ROUTING SECTION FOR VERCEL ========================
+// =========================================================================
+// By placing static serving first, we let Express handle requests for CSS, JS, etc.
+app.use(express.static(path.join(__dirname))); 
+
+// Then we handle the special case for the Admin SPA. If a user is at /admin/content
+// and hits refresh, this ensures they get the SPA's entrypoint.
 app.get("/admin*", (req, res) => {
   res.sendFile(path.join(__dirname, "admin", "index.html"));
 });
 
+// For any other route that is not an API call or a static file,
+// it is assumed to be a frontend page. This will catch requests for 
+// /movies.html, /animes.html etc., and also for just "/" and serve the correct file.
+// NOTE: This catch-all must be placed AFTER the API routes.
+app.get("/*", (req, res) => {
+    // If the request has an extension (like .html), serve that file.
+    if(path.extname(req.path).length > 0) {
+        res.sendFile(path.join(__dirname, req.path));
+    } else {
+        // If there's no extension, it's a clean URL like /movies, so serve movies.html.
+        // Or if it's the root "/", serve index.html.
+        const page = req.path === '/' ? 'index' : req.path;
+        res.sendFile(path.join(__dirname, `${page}.html`));
+    }
+});
+
+
 // --- Start the Server ---
 app.listen(PORT, () => {
   console.log(`StreamVerse server is running on port ${PORT}.`);
-  console.log(
-    `Access your application at the URL provided by your cloud environment for port ${PORT}.`
-  );
 });
