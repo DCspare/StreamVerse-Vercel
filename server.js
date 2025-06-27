@@ -864,6 +864,11 @@ app.delete("/api/requests/:id", (req, res) => {
 // --- Static File Serving ---
 app.use(express.static(path.join(__dirname)));
 
+// NEW: Add a route specifically for the homepage
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // --- Admin SPA Catch-All Route ---
 app.get("/admin*", (req, res) => {
   res.sendFile(path.join(__dirname, "admin", "index.html"));
